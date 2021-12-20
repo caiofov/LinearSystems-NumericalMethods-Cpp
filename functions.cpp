@@ -1,9 +1,9 @@
-#include "geral.h"
+#include "methods.hpp"
 #include <vector>
 #include <iostream>
 using namespace std;
 
-void mostrarVetor(vector<float> v){
+void showVector(vector<float> v){
   printf("{");
   for(int i = 0; i < v.size();i++){
     printf("%f,", v[i]);
@@ -11,7 +11,7 @@ void mostrarVetor(vector<float> v){
   printf("}\n");
 }
 
-void mostrarVetor(vector<vector<float>> v){
+void showVector(vector<vector<float>> v){
   printf("{");
   for(int i = 0; i < v.size();i++){
     printf("{");

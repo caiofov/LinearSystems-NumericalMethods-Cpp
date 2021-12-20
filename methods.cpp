@@ -26,8 +26,8 @@ vector<float> eliminacaoGauss(vector<vector<float>> A, vector<float> b){
 
       //zerar o elemento A[i][k]
       A[i][k] = 0;
-      mostrarVetor(b);
-      mostrarVetor(A);
+      showVector(b);
+      showVector(A);
     }}
   printf("\n");
   return substituicoes_retroativas(A,b);
@@ -79,8 +79,8 @@ vector<float> gaussParcial(vector<vector<float>> A, vector<float> b){
 
     //zerar o elemento A[i][k]
     A[i][k] = 0;
-    mostrarVetor(b);
-    mostrarVetor(A);
+    showVector(b);
+    showVector(A);
   }}
   printf("\n");
   return substituicoes_retroativas(A,b);
@@ -110,9 +110,9 @@ vector<vector<vector<float>>> fatoracaoLU(vector<vector<float>> A){
       //zerar o elemento A[i][k]
       A[i][k] = 0;
       printf("\nMatriz L:");
-      mostrarVetor(L);
+      showVector(L);
       printf("Matriz U:");
-      mostrarVetor(A);
+      showVector(A);
     }}
 
   vector<vector<vector<float>>> r{L,A};
@@ -154,8 +154,8 @@ vector<float> gaussJordan(vector<vector<float>> A, vector<float> b){
         A[i][k] = 0; //zerar o elemento A[i][k]
 
         printf("\nFator m: %f\n", m);
-        mostrarVetor(b);
-        mostrarVetor(A);
+        showVector(b);
+        showVector(A);
       }
     }}
   return b;
