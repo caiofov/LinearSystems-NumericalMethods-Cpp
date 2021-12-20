@@ -85,3 +85,43 @@ vector<float> gaussParcial(vector<vector<float>> A, vector<float> b){
   printf("\n");
   return substituicoes_retroativas(A,b);
 }
+
+
+vector<vector<vector<float>>> fatoracaoLU(vector<vector<float>> A){
+  int n = A.size();
+
+  vector<vector<float>> L = identidade(n);
+
+  for(int k = 0; k < n-1; k++){ //para cada etapa K
+    printf("\nEtapa %d",k+1);
+    
+    for(int i = k+1; i < n; i++){ //para cada linha i
+      //fator m
+      float m = - A[i][k] / A[k][k];
+
+      L[i][k] = -m;
+
+      //atualizar a linha i da matriz, pecorrendo todas as colunas J
+      for(int j = k+1; j < n; j++){ //para cada coluna j
+        A[i][j] = m * A[k][j] + A[i][j];
+      }
+      printf("\nFator m: %f", m);
+
+      //zerar o elemento A[i][k]
+      A[i][k] = 0;
+      printf("\nMatriz L:");
+      mostrarVetor(L);
+      printf("Matriz U:");
+      mostrarVetor(A);
+    }}
+
+  vector<vector<vector<float>>> r{L,A};
+  return r;
+}
+
+vector<float> resolverLUx(vector<vector<float>> L, vector<vector<float>> U, vector<float> b){ //resolver o sistema LUx = b
+  vector<float> y = substituicoes_sucessivas(L,b);
+  vector<float> x = substituicoes_retroativas(U,y);
+
+  return x;
+}
