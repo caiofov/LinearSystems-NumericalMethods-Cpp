@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-#include "geral.h"
+#include "methods.hpp"
 #include <vector>
 
 
@@ -124,4 +124,39 @@ vector<float> resolverLUx(vector<vector<float>> L, vector<vector<float>> U, vect
   vector<float> x = substituicoes_retroativas(U,y);
 
   return x;
+}
+
+
+vector<float> gaussJordan(vector<vector<float>> A, vector<float> b){
+  int n = A.size();
+  
+  for(int k = 0; k < n; k++){ //para cada etapa K
+    printf("\nEtapa %d",k+1);
+    //transformar o pivot em 1
+    for(int j = k+1; j < n; j++){//para cada coluna j
+      A[k][j] = A[k][j] / A[k][k];
+    }
+    b[k] = b[k] / A[k][k];
+    A[k][k] = 1;
+    
+    for(int i = 0; i < n; i++){ //para cada linha i
+      //fator m
+
+      if(i!=k){ //só fará a eliminação se a linha não for a do pivot
+        float m = - A[i][k] / A[k][k];
+      
+        //atualizar a linha i da matriz, pecorrendo todas as colunas J
+        for(int j = k+1; j < n; j++){ //para cada coluna j
+          A[i][j] = m * A[k][j] + A[i][j];
+        }
+      
+        b[i] = m * b[k] + b[i]; //atualiza o vetor B na linha i
+        A[i][k] = 0; //zerar o elemento A[i][k]
+
+        printf("\nFator m: %f\n", m);
+        mostrarVetor(b);
+        mostrarVetor(A);
+      }
+    }}
+  return b;
 }
